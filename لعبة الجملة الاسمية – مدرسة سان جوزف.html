@@ -1,0 +1,251 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لعبة الجملة الاسمية – مدرسة سان جوزف</title>
+<style>
+:root{--p:#7c3aed;--d:#5b21b6;--soft:#f5f3ff;--b1:#ede9fe;--b2:#fce7f3;--b3:#dbeafe;--fs:1;--m:#2563eb;--k:#16a34a}
+[data-theme=blue]{--p:#2563eb;--d:#1e40af;--soft:#eff6ff;--b1:#dbeafe;--b2:#e0f2fe;--b3:#ede9fe}
+[data-theme=green]{--p:#059669;--d:#047857;--soft:#ecfdf5;--b1:#d1fae5;--b2:#ecfccb;--b3:#e0f2fe}
+[data-theme=orange]{--p:#ea580c;--d:#9a3412;--soft:#fff7ed;--b1:#ffedd5;--b2:#fef9c3;--b3:#fce7f3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:calc(16px*var(--fs))}
+body{font-family:"Segoe UI",Tahoma,Arial,sans-serif;background:linear-gradient(135deg,var(--b1),var(--b2) 50%,var(--b3));min-height:100vh;padding:14px;color:#1e293b}
+.wrap{max-width:860px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;background:var(--p);color:#fff;border-radius:20px;padding:12px 20px;margin-bottom:14px;box-shadow:0 6px 0 var(--d)}
+header .t{font-size:1.4rem;font-weight:800}
+header .s{font-size:.95rem;opacity:.9}
+.tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tb{font-family:inherit;font-size:1rem;font-weight:700;border:none;border-radius:10px;padding:6px 12px;cursor:pointer;background:rgba(255,255,255,.22);color:#fff}
+.tb:hover{background:rgba(255,255,255,.38)}
+.dot{width:22px;height:22px;border-radius:50%;border:3px solid #fff;cursor:pointer;display:inline-block}
+#app{background:#fff;border-radius:28px;box-shadow:0 12px 40px rgba(0,0,0,.15);padding:28px;text-align:center}
+h1{font-size:2rem;color:var(--p);margin-bottom:6px}
+h2{font-size:1.5rem;margin-bottom:12px;line-height:1.7}
+p{font-size:1.25rem;line-height:1.9}
+.sub{color:#64748b;font-size:1.1rem;margin-bottom:16px}
+.lesson{background:var(--soft);border-radius:20px;padding:16px 22px;margin:14px 0;text-align:right;border-right:8px solid var(--p)}
+.lesson p{margin:6px 0}
+.m{color:var(--m);font-weight:800}.k{color:var(--k);font-weight:800}
+.big{font-size:2.6rem;font-weight:800;margin:16px 0;line-height:1.7}
+.btn{font-family:inherit;font-size:1.35rem;font-weight:700;border:none;border-radius:16px;padding:12px 28px;margin:6px;cursor:pointer;background:var(--p);color:#fff;box-shadow:0 5px 0 var(--d);transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--d)}
+.btn.alt{background:#f59e0b;box-shadow:0 5px 0 #b45309}
+.opts{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:6px}
+.opt{background:#f1f5f9;color:#1e293b;box-shadow:0 5px 0 #cbd5e1;min-width:210px;font-size:1.5rem}
+.words .opt{font-size:2.2rem;min-width:150px}
+.opt:hover:not(:disabled){background:var(--soft)}
+.opt.right{background:#22c55e;color:#fff;box-shadow:0 5px 0 #15803d}
+.opt.wrong{background:#ef4444;color:#fff;box-shadow:0 5px 0 #b91c1c;animation:shake .4s}
+.opt:disabled{cursor:default}
+.bar{height:14px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.bar>div{height:100%;background:linear-gradient(90deg,var(--p),#ec4899);transition:width .35s}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:1.1rem;font-weight:700;color:#475569;margin-bottom:10px}
+.chip{background:var(--soft);color:var(--d);border-radius:99px;padding:4px 16px;font-size:1rem;font-weight:800}
+.fb{min-height:70px;font-size:1.2rem;font-weight:700;margin-top:14px;line-height:1.9;padding:0 6px}
+.fb.good{color:#15803d}.fb.bad{color:#b91c1c}
+.hide{display:none}
+.stars{font-size:3.6rem;margin:6px 0;color:#f59e0b;letter-spacing:6px}
+.stars span{display:inline-block;animation:pop .5s backwards}
+.sk{text-align:right;margin:16px 0}
+.sk .row{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:1.05rem;font-weight:700}
+.sk .row b{width:150px}
+.sk .meter{flex:1;height:14px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.sk .meter i{display:block;height:100%;background:var(--p)}
+.rev{text-align:right;background:#fef2f2;border-radius:16px;padding:12px 18px;margin:12px 0;font-size:1.05rem;line-height:1.9}
+.rev div{border-bottom:1px dashed #fecaca;padding:6px 0}
+.rev div:last-child{border:none}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9}
+.confetti i{position:absolute;top:-16px;width:10px;height:14px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(108vh) rotate(720deg)}}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@keyframes pop{from{transform:scale(0) rotate(-40deg);opacity:0}}
+@media(max-width:600px){.opt{min-width:100%}.big{font-size:2rem}}
+</style>
+</head>
+<body data-theme="violet">
+<div class="wrap">
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <img src="data:image/jpeg;base64,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" alt="شعار مدرسة سان جوزف" style="width:52px;height:52px;border-radius:12px;background:#fff;padding:4px;object-fit:contain">
+    <div><div class="t">لغتي – الجملة الاسمية</div><div class="s" id="school">مدرسة سان جوزف – Saint Joseph School – الصف الرابع الابتدائي</div></div>
+  </div>
+  <div class="tools">
+    <span class="dot" style="background:#7c3aed" onclick="setTheme('violet')"></span>
+    <span class="dot" style="background:#2563eb" onclick="setTheme('blue')"></span>
+    <span class="dot" style="background:#059669" onclick="setTheme('green')"></span>
+    <span class="dot" style="background:#ea580c" onclick="setTheme('orange')"></span>
+    <button class="tb" onclick="setFs(-.1)" title="تصغير الخط">أ-</button>
+    <button class="tb" onclick="setFs(.1)" title="تكبير الخط">أ+</button>
+    <button class="tb" id="snd" onclick="toggleSound()">صوت: يعمل</button>
+    <button class="tb" onclick="fullscreen()">ملء الشاشة</button>
+  </div>
+</header>
+<div id="app"></div>
+<footer style="text-align:center;color:#64748b;font-size:.85rem;margin-top:14px">
+  مدرسة سان جوزف – Saint Joseph School &nbsp;|&nbsp; إعداد: ديالا حسين فهمي – Diala Hussien Fahmy
+</footer>
+</div>
+<script>
+/* ===== إعدادات يمكن تعديلها ===== */
+const SCHOOL_NAME = "";          // اكتب اسم المدرسة هنا ليظهر في الأعلى
+const TOTAL_STARS = 3;
+
+const app=document.getElementById('app');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(SCHOOL_NAME)document.getElementById('school').textContent=SCHOOL_NAME+" – الصف الرابع الابتدائي";
+
+/* ===== الإعدادات المحفوظة ===== */
+let cfg={theme:'violet',fs:1,mute:false};
+try{Object.assign(cfg,JSON.parse(localStorage.getItem('nomCfg')||'{}'))}catch(e){}
+function save(){try{localStorage.setItem('nomCfg',JSON.stringify(cfg))}catch(e){}}
+function applyCfg(){document.body.dataset.theme=cfg.theme;document.documentElement.style.setProperty('--fs',cfg.fs);document.getElementById('snd').textContent='صوت: '+(cfg.mute?'متوقف':'يعمل')}
+function setTheme(t){cfg.theme=t;applyCfg();save()}
+function setFs(d){cfg.fs=Math.min(1.5,Math.max(.8,Math.round((cfg.fs+d)*10)/10));applyCfg();save()}
+function toggleSound(){cfg.mute=!cfg.mute;applyCfg();save()}
+function fullscreen(){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}}
+applyCfg();
+
+/* ===== المؤثرات ===== */
+function sound(ok){if(cfg.mute)return;try{const c=new (window.AudioContext||window.webkitAudioContext)();const seq=ok?[523,659,784]:[220,170];seq.forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='sine';o.frequency.value=f;const t=c.currentTime+i*.12;g.gain.setValueAtTime(.14,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.25)})}catch(e){}}
+function confetti(n){const c=document.createElement('div');c.className='confetti';const cols=['#f59e0b','#ec4899','#22c55e','#3b82f6','#a855f7'];for(let i=0;i<n;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%5];s.style.animationDelay=Math.random()*.4+'s';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';c.appendChild(s)}document.body.appendChild(c);setTimeout(()=>c.remove(),3000)}
+
+/* ===== بنك الأسئلة ===== */
+// مفاهيم: [السؤال, الصحيح, [الخاطئ], التعليل]
+const DEF=[
+["الجملة الاسمية هي الجملة التي تبدأ بـ ...","اسم",["فعل","حرف جر"],"الجملة الاسمية تبدأ باسم، مثل: <span class='m'>الشَّمْسُ</span> <span class='k'>مُشْرِقَةٌ</span>."],
+["تتكوّن الجملة الاسمية من ...","مبتدأ وخبر",["فعل وفاعل","فعل ومفعول به"],"الجملة الاسمية تتكوّن من <span class='m'>مبتدأ</span> و<span class='k'>خبر</span>."],
+["المبتدأ هو ...","الاسم الذي نتحدث عنه ونبدأ به الجملة الاسمية",["الكلمة التي تكمل معنى الجملة","الفعل الذي يدل على حدث"],"المبتدأ هو الاسم الذي نتحدث عنه، ويأتي في أول الجملة الاسمية."],
+["الخبر هو ...","الكلمة التي تكمل معنى المبتدأ وتعطينا معلومة عنه",["أول كلمة في الجملة الاسمية","الفعل في أول الجملة"],"الخبر يكمل معنى المبتدأ ويعطي معلومة عنه."],
+["حكم المبتدأ والخبر في الجملة الاسمية هو ...","الرفع",["النصب","الجر"],"المبتدأ والخبر مرفوعان."],
+["العلامة الأصلية للرفع في الاسم المفرد هي ...","الضمة",["الفتحة","الكسرة"],"علامة الرفع الأصلية هي الضمة، مثل: <span class='m'>الْوَلَدُ</span>."],
+["يتطابق الخبر مع المبتدأ في ...","النوع (تذكير/تأنيث) والعدد (إفراد/تثنية/جمع)",["عدد الحروف فقط","الحركة الأخيرة فقط"],"الخبر يطابق المبتدأ في النوع والعدد، فنقول: البنتان مؤدبتان."]
+];
+// جمل اسمية [مبتدأ، خبر]
+const NOM=[["الشَّمْسُ","مُشْرِقَةٌ"],["السَّمَاءُ","صَافِيَةٌ"],["الْوَلَدُ","مُجْتَهِدٌ"],["الْحَدِيقَةُ","وَاسِعَةٌ"],["الْكِتَابُ","مُفِيدٌ"],["الْمُعَلِّمُ","نَشِيطٌ"],["الْبِنْتُ","مُؤَدَّبَةٌ"],["الْقَمَرُ","مُنِيرٌ"],["الْمَاءُ","بَارِدٌ"],["مِصْرُ","جَمِيلَةٌ"],["التِّلْمِيذَانِ","مُجْتَهِدَانِ"],["الْبِنْتَانِ","مُؤَدَّبَتَانِ"],["الْمُعَلِّمُونَ","مُخْلِصُونَ"],["اللَّاعِبُونَ","مَاهِرُونَ"]];
+// جمل فعلية
+const VERB=[["ذَهَبَ","الطَّالِبُ","إِلَى","الْمَدْرَسَةِ"],["يَكْتُبُ","التِّلْمِيذُ","الدَّرْسَ"],["رَسَمَتْ","سَارَةُ","لَوْحَةً"],["تُشْرِقُ","الشَّمْسُ","صَبَاحًا"],["قَرَأَ","أَحْمَدُ","الْقِصَّةَ"],["يَلْعَبُ","الطِّفْلُ","فِي","الْحَدِيقَةِ"],["شَرِبَ","الْوَلَدُ","الْمَاءَ"]];
+// المطابقة: مبتدأ، الخبر الصحيح، الخاطئ، التعليل
+const FILL=[
+["الْبِنْتَانِ","مُؤَدَّبَتَانِ",["مُؤَدَّبَةٌ","مُؤَدَّبُونَ"],"المبتدأ مثنى مؤنث، فالخبر مثنى مؤنث."],
+["الْوَلَدُ","مُجْتَهِدٌ",["مُجْتَهِدَةٌ","مُجْتَهِدَانِ"],"المبتدأ مفرد مذكر، فالخبر مفرد مذكر."],
+["الْمُعَلِّمُونَ","مُخْلِصُونَ",["مُخْلِصٌ","مُخْلِصَةٌ"],"المبتدأ جمع مذكر، فالخبر جمع مذكر."],
+["الْحَدِيقَةُ","وَاسِعَةٌ",["وَاسِعٌ","وَاسِعَانِ"],"المبتدأ مفرد مؤنث، فالخبر مفرد مؤنث."],
+["التِّلْمِيذَانِ","نَشِيطَانِ",["نَشِيطٌ","نَشِيطُونَ"],"المبتدأ مثنى مذكر، فالخبر مثنى مذكر."],
+["الطَّالِبَاتُ","مُجْتَهِدَاتٌ",["مُجْتَهِدٌ","مُجْتَهِدُونَ"],"المبتدأ جمع مؤنث، فالخبر جمع مؤنث."],
+["الْفَتَاةُ","ذَكِيَّةٌ",["ذَكِيٌّ","ذَكِيَّانِ"],"المبتدأ مفرد مؤنث، فالخبر مفرد مؤنث."]];
+// علامة الرفع: [المبتدأ، العلامة، التعليل]
+const RAF=[
+["الْوَلَدُ","الضمة","الاسم المفرد يُرفع بالضمة."],
+["الشَّمْسُ","الضمة","الاسم المفرد يُرفع بالضمة."],
+["التِّلْمِيذَانِ","الألف","المثنى يُرفع بالألف."],
+["الْبِنْتَانِ","الألف","المثنى يُرفع بالألف."],
+["الْمُعَلِّمُونَ","الواو","جمع المذكر السالم يُرفع بالواو."],
+["اللَّاعِبُونَ","الواو","جمع المذكر السالم يُرفع بالواو."]];
+// الجملة الصحيحة: [الصحيحة، [الخاطئتان]]
+const ERR=[
+["الْبِنْتُ مُجْتَهِدَةٌ",["الْبِنْتُ مُجْتَهِدٌ","الْبِنْتُ مُجْتَهِدُونَ"],"المبتدأ مفرد مؤنث، فالخبر مفرد مؤنث."],
+["الْمُعَلِّمَانِ مُخْلِصَانِ",["الْمُعَلِّمَانِ مُخْلِصٌ","الْمُعَلِّمَانِ مُخْلِصُونَ"],"المبتدأ مثنى، فالخبر مثنى."],
+["الْمُهَنْدِسُونَ مَاهِرُونَ",["الْمُهَنْدِسُونَ مَاهِرٌ","الْمُهَنْدِسُونَ مَاهِرَةٌ"],"المبتدأ جمع مذكر، فالخبر جمع مذكر."],
+["الزَّهْرَةُ جَمِيلَةٌ",["الزَّهْرَةُ جَمِيلٌ","الزَّهْرَةُ جَمِيلَانِ"],"المبتدأ مفرد مؤنث، فالخبر مفرد مؤنث."]];
+
+const SKILLS={D:'المفاهيم',A:'تمييز الجملة الاسمية',P:'تمييز الجملة الاسمية',B:'المبتدأ والخبر',K:'المبتدأ والخبر',R:'علامات الرفع',F:'مطابقة الخبر للمبتدأ',E:'مطابقة الخبر للمبتدأ'};
+const ORDER=['D','D','A','A','P','B','K','R','R','F','F','E'];
+
+let qs=[],qi=0,score=0,locked=false,log=[];
+
+function deal(pool){const s=shuffle(pool);let i=0;return()=>s[i++%s.length]}
+function mcq(t,prompt,stem,ok,bad,why,keep){
+  let o=keep?[ok,...bad]:shuffle([ok,...bad]);
+  return {t,prompt,stem,opts:o,ok:o.indexOf(ok),why,words:false};
+}
+function build(){
+  const d=deal(DEF),n=deal(NOM),v=deal(VERB),f=deal(FILL),r=deal(RAF),e=deal(ERR);
+  return ORDER.map(t=>{
+    if(t==='D'){const x=d();return mcq(t,'أكمل:',x[0],x[1],x[2],x[3])}
+    if(t==='A'){
+      if(Math.random()<.5){const s=n();return mcq(t,'هل هذه الجملة اسمية أم فعلية؟',s.join(' '),'جملة اسمية',['جملة فعلية'],`تبدأ الجملة باسم (<span class='m'>${s[0]}</span>) فهي <b>اسمية</b>.`,true)}
+      const s=v();return mcq(t,'هل هذه الجملة اسمية أم فعلية؟',s.join(' '),'جملة فعلية',['جملة اسمية'],`تبدأ الجملة بفعل (<b>${s[0]}</b>) فهي <b>فعلية</b>، وليست اسمية.`,true);
+    }
+    if(t==='P'){
+      const s=n(),a=v(),b=v();
+      return mcq(t,'أي الجمل التالية جملة اسمية؟','',s.join(' '),[a.join(' '),b.join(' ')],`<span class='m'>${s[0]}</span> اسم، فالجملة تبدأ باسم وهي اسمية. أما الجملتان الأخريان فتبدآن بفعل.`);
+    }
+    if(t==='B'||t==='K'){
+      const s=n(),isB=t==='B';
+      return {t,prompt:`اضغط على <span class="${isB?'m':'k'}">${isB?'المبتدأ':'الخبر'}</span> في الجملة:`,stem:'',opts:s,ok:isB?0:1,why:`<span class='m'>${s[0]}</span> مبتدأ، و<span class='k'>${s[1]}</span> خبر.`,words:true};
+    }
+    if(t==='F'){const x=f();return mcq(t,'اختر الخبر المناسب للمبتدأ:',`<span class='m'>${x[0]}</span> <span style="color:#94a3b8">_____</span>`,x[1],x[2],x[3])}
+    if(t==='R'){const x=r();return mcq(t,`ما علامة رفع المبتدأ <span class='m'>${x[0]}</span> ؟`,'',x[1],['الضمة','الألف','الواو'].filter(z=>z!==x[1]),x[2])}
+    const x=e();return mcq(t,'اختر الجملة الاسمية الصحيحة:','',x[0],x[1],x[2]);
+  });
+}
+
+/* ===== الشاشات ===== */
+function home(){
+  app.innerHTML=`
+  <h1>لعبة الجملة الاسمية</h1>
+  <p class="sub">الصف الرابع الابتدائي – المبتدأ والخبر</p>
+  <div class="lesson">
+    <p><b>الجملة الاسمية</b>: جملة تبدأ باسم، وتتكوّن من <span class="m">مبتدأ</span> + <span class="k">خبر</span>.</p>
+    <p><span class="m">المبتدأ</span>: الاسم الذي نتحدث عنه. <span class="k">الخبر</span>: يُكمل معناه ويعطي معلومة عنه.</p>
+    <p>المبتدأ والخبر <b>مرفوعان</b>: بالضمة في المفرد، وبالألف في المثنى، وبالواو في جمع المذكر السالم.</p>
+    <p>الخبر <b>يطابق</b> المبتدأ في النوع والعدد: <span class="m">الْبِنْتَانِ</span> <span class="k">مُؤَدَّبَتَانِ</span></p>
+  </div>
+  <p class="sub">12 سؤالًا في 5 مهارات – اقرأ الدرس جيدًا ثم ابدأ</p>
+  <button class="btn" onclick="start()">ابدأ الاختبار</button>
+  <p style="margin-top:22px;font-size:.95rem;color:#94a3b8">صُنعت بمحبة لـ ديالا وأصدقائها في مدرسة سان جوزف 💜</p>`;
+}
+function start(){qs=build();qi=0;score=0;log=[];show()}
+
+function show(){
+  locked=false;
+  const q=qs[qi];
+  app.innerHTML=`<div class="top"><span>السؤال ${qi+1} من ${qs.length}</span><span class="chip">${SKILLS[q.t]}</span><span>النقاط: ${score}</span></div>
+  <div class="bar"><div style="width:${qi/qs.length*100}%"></div></div>
+  <h2>${q.prompt}</h2>
+  ${q.stem?`<div class="big">${q.stem}</div>`:''}
+  <div class="opts ${q.words?'words':''}">${q.opts.map((o,i)=>`<button class="btn opt" onclick="ans(${i})">${o}</button>`).join('')}</div>
+  <div class="fb" id="fb"></div>
+  <button class="btn alt hide" id="next" onclick="next()">${qi===qs.length-1?'عرض النتيجة':'السؤال التالي'}</button>`;
+}
+function ans(i){
+  if(locked)return;locked=true;
+  const q=qs[qi],ok=i===q.ok,bs=document.querySelectorAll('.opt');
+  bs.forEach(b=>b.disabled=true);
+  bs[q.ok].classList.add('right');
+  if(!ok)bs[i].classList.add('wrong');
+  if(ok){score++;confetti(24)}
+  sound(ok);
+  log.push({q,ok,mine:q.opts[i]});
+  const fb=document.getElementById('fb');fb.className='fb '+(ok?'good':'bad');
+  fb.innerHTML=(ok?'إجابة صحيحة، أحسنت! ':'إجابة غير صحيحة. ')+q.why;
+  document.getElementById('next').classList.remove('hide');
+}
+function next(){qi++;qi<qs.length?show():end()}
+
+function end(){
+  const n=qs.length,pct=score/n;
+  const grade=score>=11?'متفوق':score>=9?'ممتاز':score>=7?'جيد جدًا':score>=5?'جيد':'يحتاج إلى مراجعة';
+  const st=score>=10?3:score>=7?2:score>=4?1:0;
+  const sk={};log.forEach(l=>{const k=SKILLS[l.q.t];sk[k]=sk[k]||{r:0,t:0};sk[k].t++;if(l.ok)sk[k].r++});
+  const wrong=log.filter(l=>!l.ok);
+  const txt=l=>(l.q.stem?l.q.stem:l.q.prompt).replace(/_____/g,'...');
+  app.innerHTML=`<h1>النتيجة النهائية</h1>
+  <div class="stars">${[0,1,2].map(i=>`<span style="animation-delay:${i*.25}s">${i<st?'★':'☆'}</span>`).join('')}</div>
+  <p style="font-size:2rem;font-weight:800">${score} من ${n}</p>
+  <p class="sub" style="margin:0">التقدير: <b style="color:var(--p)">${grade}</b></p>
+  <div class="sk">${Object.keys(sk).map(k=>`<div class="row"><b>${k}</b><div class="meter"><i style="width:${sk[k].r/sk[k].t*100}%"></i></div><span>${sk[k].r}/${sk[k].t}</span></div>`).join('')}</div>
+  ${wrong.length?`<div class="rev"><b>راجع هذه الأسئلة:</b>${wrong.map(l=>`<div>${txt(l)} — الصحيح: <b>${l.q.opts[l.q.ok]}</b><br><span style="color:#64748b">${l.q.why}</span></div>`).join('')}</div>`:'<p class="fb good">لم تخطئ في أي سؤال، عمل رائع!</p>'}
+  <button class="btn" onclick="start()">اختبار جديد</button>
+  <button class="btn alt" onclick="home()">مراجعة الدرس</button>`;
+  if(pct>=.7){sound(true);confetti(90)}else sound(false);
+}
+home();
+</script>
+</body>
+</html>
+
+</body></html>
